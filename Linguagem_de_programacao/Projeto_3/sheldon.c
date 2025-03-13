@@ -45,16 +45,25 @@ int Def_QuantidadeDePartidas(){
 
     system("cls || clear");
 
-    printf("Defina o número de partidas"
-            "O jogo deve ter numero impar de partidas"
+    printf("Defina o numero de partidas\n"
+            "O jogo deve ter numero impar de partidas impar\n"
             "Partidas: ");
     scanf("%d", &partidas);
 
     return partidas;
 }
 
-int Def_TempoDeJogo(){
+int Def_TempoDeTurnos(){
+    int tempo = 0;
+
     system("cls || clear");
+
+    printf("Defina o tempo máximo de um turno no jogo\n"
+            "30s, 45s ou 60s: ");
+    scanf("%d", &tempo);
+    
+    if (tempo == 30 && tempo == 45 && tempo == 60)
+        return tempo;
 }
 
 int main(){
@@ -67,9 +76,13 @@ int main(){
     Def_Player1();
     player2_ou_maquina = Def_Player2();
     partidas = Def_QuantidadeDePartidas();
-    tempo = Def_TempoDeJogo();
-    
+    tempo = Def_TempoDeTurnos();
 
+    if (player2_ou_maquina == 1){
+        RegrasDoJogo();
+        JogoComMaquia();
+    }
+    
 }
 
 
