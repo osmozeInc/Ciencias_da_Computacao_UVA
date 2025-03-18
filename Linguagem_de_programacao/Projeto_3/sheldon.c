@@ -15,6 +15,7 @@ são avaliadas e o placar é atualizado. No final do turno quem tiver mais ponto
 “You Lose!” ao perdedor. 
 */
 
+// arrays de char definidos globalmente para evitar uso de ponteiros
 static char player_1[20];
 static char player_2[20];
 
@@ -66,21 +67,43 @@ int Def_TempoDeTurnos(){
         return tempo;
 }
 
+int RegrasDoJogo(int partidas, int tempo){
+    printf("Jogo Pedra, Papel, Tesoura, Lagarto, Spook\n"
+            "Regras do Jogo: \n"
+            "- Digite Pedra, Papel Tesoura...Etc para jogar"
+            "- %d Partidas com %d segundos cada\n\n"
+            "...pressione enter\n ", partidas, tempo);
+    getchar();
+    getchar();
+}
+
+
+void JogadorComJogador(int partidas, int tempo){
+    char resposta_do_player_1[10];
+    char resposta_do_player_2[10];
+    
+    system("cls || clear");
+    
+    printf("- Digite Pedra, Papel Tesoura, Lagarto ou Spook para jogar");
+    scanf(" %s", &resposta_do_player_1)
+}
+
 int main(){
     int partidas; // define a quantidade de partidas do jogo
-    int tempo; // intervalo entre partidas
-    int player2_ou_maquina; // '1' se existe player 2 e '0' se vai ser a maquina
+    int tempo_do_turno; // intervalo entre partidas
+    int Jogador1_ou_maquina0; // '1' se existe player 2 ou '0' se vai ser a maquina
 
     // Definição das regras de Jogo
     // Def é abreviação de Definir
     Def_Player1();
-    player2_ou_maquina = Def_Player2();
+    Jogador1_ou_maquina0 = Def_Player2();
     partidas = Def_QuantidadeDePartidas();
-    tempo = Def_TempoDeTurnos();
+    tempo_do_turno = Def_TempoDeTurnos();
 
-    if (player2_ou_maquina == 1){
-        RegrasDoJogo();
-        JogoComMaquia();
+    // se a variavel for igual a 1, o jogo será jogador X jogador
+    if (Jogador1_ou_maquina0 == 1){
+        RegrasDoJogo(partidas, tempo_do_turno);
+        JogarComJogador(partidas, tempo_do_turno);
     }
     
 }
