@@ -4,7 +4,7 @@
 
 
 void RegrasDoJogo(int tentativas){
-    printf("=== Jogo de Adivinhacao ===\n");
+    printf("|||||| Jogo de Adivinhacao ||||||\n");
     printf("Tente adivinhar o numero entre 1 e 100\n");
     printf("Voce tem %d tentativas.\n\n", tentativas);
 }

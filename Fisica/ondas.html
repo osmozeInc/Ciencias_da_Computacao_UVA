@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabalho de Física</title>
+  <style>
+    canvas { background: #fff8b0; display: block; margin: auto; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .equacao {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      max-width: 600px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    th {
+      background: #eee;
+    }
+  </style>
+</head>
+
+<div> <!-- Uso de Bootstrap para estilizar o site com mais velocidade -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css" integrity="sha512-i1b/nzkVo97VN5WbEtaPebBG8REvjWeqNclJ6AItj7msdVcaveKrlIIByDpvjk5nwHjXkIqGZscVxOrTb9tsMA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</div>
+
+<script src="ondas.js" type="module"></script>
+
+<body>
+<canvas id="onda" width="800" height="300"></canvas>
+
+<div class="container d-flex justify-content-evenly mt-5 col-12">
+
+    <div class="col-3 d-flex align-items-center flex-column">
+        <label for="posicao">Posição</label>
+        <input type="text" id="posicao" class="col-6">
+    </div>
+
+    <div class="col-3 d-flex align-items-center flex-column">
+        <label for="amplitude">Amplitude</label>
+        <input type="text" id="amplitude" class="col-6">
+    </div>
+
+    <div class="col-3 d-flex align-items-center flex-column">
+        <label for="comprimentoOnda">Comprimento da onda</label>
+        <input type="text" id="comprimento" class="col-6">
+    </div>
+
+    <div class="col-3 d-flex align-items-center flex-column">
+        <label for="frequencia">Frequência</label>
+        <input type="text" id="frequencia" class="col-6">
+    </div>
+</div>
+
+<br>
+<div class="container d-flex justify-content-center">
+    <button id="desenhar">Desenhar</button>
+</div>
+
+<br><br>
+<div class="container d-flex flex-column align-items-center">
+    <div class="equacao">
+        y(x, t) = A · sin(kx - ωt + φ)
+    </div>
+    <div class="equacao">
+        k = 2π / λ
+    </div>
+    <div class="equacao">
+        ω = 2π · f
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Variável</th>
+                <th>Significado</th>
+                <th>Unidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>y(x, t)</strong></td>
+                <td>Posição vertical da onda no ponto x e tempo t</td>
+                <td>metros (m)</td>
+            </tr>
+            <tr>
+                <td><strong>A</strong></td>
+                <td>Amplitude da onda (altura máxima)</td>
+                <td>metros (m)</td>
+            </tr>
+            <tr>
+                <td><strong>k</strong></td>
+                <td>Número de onda = 2π / λ</td>
+                <td>rad/m</td>
+            </tr>
+            <tr>
+                <td><strong>ω</strong></td>
+                <td>Frequência angular = 2π · f</td>
+                <td>rad/s</td>
+            </tr>
+            <tr>
+                <td><strong>φ</strong></td>
+                <td>Fase inicial (ajuste de posição inicial)</td>
+                <td>radianos</td>
+            </tr>
+            <tr>
+                <td><strong>x</strong></td>
+                <td>Posição no espaço</td>
+                <td>metros (m)</td>
+            </tr>
+            <tr>
+                <td><strong>t</strong></td>
+                <td>Tempo</td>
+                <td>segundos (s)</td>
+            </tr>
+            <tr>
+                <td><strong>λ</strong></td>
+                <td>Comprimento de onda (distância entre cristas)</td>
+                <td>metros (m)</td>
+            </tr>
+            <tr>
+                <td><strong>f</strong></td>
+                <td>Frequência (número de oscilações por segundo)</td>
+                <td>Hz</td>
+            </tr>
+            <tr>
+                <td><strong>v</strong></td>
+                <td>Velocidade da onda = λ · f</td>
+                <td>m/s</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
