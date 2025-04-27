@@ -18,7 +18,7 @@ O objetivo deste repositório é documentar minha jornada acadêmica e prática 
 
 ## 📂 Estrutura do Repositório
 
-O repositório está organizado por disciplinas e áreas de estudo. Abaixo está a estrutura principal:
+O repositório está organizado por disciplinas e áreas de estudo.
 
 
 
@@ -38,12 +38,12 @@ O repositório está organizado por disciplinas e áreas de estudo. Abaixo está
 ## 🚀 Tecnologias e Ferramentas Utilizadas
 Ao longo do curso, utilizei diversas tecnologias e ferramentas, incluindo:
 
-Linguagens de Programação: Python, Java, C, C++, JavaScript, SQL.
+Linguagens de Programação: C, JavaScript.
 
-Frameworks e Bibliotecas: React, Node.js, Flask, Django, TensorFlow.
+Frameworks e Bibliotecas:
 
-Ferramentas de Desenvolvimento: Git, Docker, VS Code, IntelliJ IDEA.
+Ferramentas de Desenvolvimento: Git, VS Code.
 
-Banco de Dados: MySQL, PostgreSQL, MongoDB.
+Banco de Dados: 
 
-Outras Ferramentas: LaTeX, Jupyter Notebook, Tableau.
+Outras Ferramentas: LaTeX, Jupyter Notebook.
