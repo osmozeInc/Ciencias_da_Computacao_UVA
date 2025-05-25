@@ -13,14 +13,13 @@ int main(){
     short fim = 0;
 
     while(fim <= 1){
-    MostrarTempo(horas, minutos, segundos);
-    AtualizarTempo(&horas, &minutos, &segundos, &fim);
-    sleep(1);
+        MostrarTempo(horas, minutos, segundos);
+        AtualizarTempo(&horas, &minutos, &segundos, &fim);
+        sleep(1);
     }
 
     return 0;
 }
-
 
 void AtualizarTempo(int *h, int *m, int *s, short *fim){
 
