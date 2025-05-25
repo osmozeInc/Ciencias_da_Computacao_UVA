@@ -5,6 +5,7 @@ typedef struct {
 } Stack;
 
 void Stack_init(Stack *stk);
+void Stack_clear(Stack *stk);
 int Stack_isEmpty(Stack *stk);
 int Stack_isFull(Stack *stk);
 void Stack_push(Stack *stk, int value);
