@@ -91,3 +91,15 @@ void List_print(List *l) {
         node = node->next;
     }
 }
+
+int List_returnAndRemoveFirstElement(List *l){
+    if (!l || !l->first) return -1;
+
+    struct Node *node = l->first;
+    int value = node->value;
+
+    l->first = node->next;
+    free(node);
+
+    return value;
+}
