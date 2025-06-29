@@ -1,6 +1,10 @@
 {
     "files.associations": {
+        "*.embeddedhtml": "html",
         "configuracoes.h": "c",
-        "conio.h": "c"
+        "conio.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "tree.h": "c"
     }
 }
