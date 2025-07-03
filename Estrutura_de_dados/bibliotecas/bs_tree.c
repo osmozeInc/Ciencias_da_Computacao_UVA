@@ -75,12 +75,107 @@ void BST_insert(BST *bst, void *value) {
     }
 }
 
-void BST_search(BST *bst, void *value) {
-    
+void *BST_search(BST *bst, void *value) {
+    if (!bst && !value) return NULL;
+
+    BST_node *node = bst->root;
+
+    while(node) {
+        int cmp_result = bst->cmp(value, node->value);
+
+        if (cmp_result < 0) 
+            node = node->left;
+        
+        else if (cmp_result > 0) 
+            node = node->right;
+        
+        else
+            return node->value;
+    }
+
+    return NULL;
 }
 
-void BST_remove(BST *bst, void *value) {
-    
+void *BST_remove(BST *bst, void *value) {
+    if (!bst && !value) return NULL;
+
+    BST_node *parent = NULL;
+    BST_node *node = bst->root;
+
+    while(node) {
+        int cmp_result = bst->cmp(value, node->value);
+
+        if (cmp_result < 0){
+            parent = node;
+            node = node->left;
+        }
+        
+        else if (cmp_result > 0) {
+            parent = node;
+            node = node->right;
+        }
+        
+        else{
+            void *removed_value = node->value;
+
+            if (!node->left && !node->right) // nao tem filhos
+            {
+                if (!parent)
+                    bst->root = NULL;
+                else if (parent->left == node)
+                    parent->left = NULL;
+                else
+                    parent->right = NULL;
+
+                free(node);
+            }
+
+            if (node->left && !node->right) // um filho (esquerda)
+            {
+                if (!parent)
+                    bst->root = node->left;
+                else if (parent->left == node)
+                    parent->left = node->left;
+                else 
+                    parent->right = node->left;
+
+                free(node);    
+            }
+            
+            if (node->left && !node->right) // um filho (direita)
+            {
+                if (!parent)
+                    bst->root = node->right;
+                else if (parent->left == node)
+                    parent->left = node->right;
+                else 
+                    parent->right = node->right;
+                
+                free(node);
+            }
+            
+            else // dois filhos
+            {
+                // encontra o sucessor (minimo da subarvore direita)
+                BST_node *successor_parent = node;
+                BST_node *successor = node->right;
+
+                while(successor->left){
+                    successor_parent = successor;
+                    successor = successor->left;
+                }
+
+                node->value = successor->value;
+
+                if (successor_parent->left == successor)
+                    successor_parent->left = successor->right;
+                else
+                    successor_parent->right = successor->right;
+                    
+                free(successor);
+            }            
+        }       
+    }
 }
 
 void BST_print(BST *bst) {

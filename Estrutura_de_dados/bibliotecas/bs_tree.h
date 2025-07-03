@@ -14,6 +14,11 @@ struct BST {
 
 BST *BST_init(int (*cmp)(void *, void *));
 void BST_free(BST *bst);
+void BST_insert(BST *bst, void *value);
+void *BST_search(BST *bst, void *value);
+void *BST_remove(BST *bst, void *value);
+void BST_print(BST *bst);
+
 
 /*
 void Tree_print(Tree *t);
