@@ -171,15 +171,30 @@ void *BST_remove(BST *bst, void *value) {
                     successor_parent->left = successor->right;
                 else
                     successor_parent->right = successor->right;
-                    
+
                 free(successor);
-            }            
+            }
+
+            bst->size--;
+            return removed_value;
         }       
     }
 }
 
+void BST_nodePrint(BST_node *node) {
+    printf("<");
+    if (node) {
+        printf("%d", *(int *)node->value);
+        BST_nodePrint(node->left);
+        BST_nodePrint(node->right);
+    }
+    printf(">");
+}
+
 void BST_print(BST *bst) {
-    
+    if (bst) {
+        BST_nodePrint(bst->root);
+    }
 }
 
 

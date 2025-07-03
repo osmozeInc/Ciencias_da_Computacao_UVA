@@ -15,14 +15,17 @@ int main(){
         BST_insert(bst, value);
     }
 
-    puts("busque um valor: ");
+    BST_print(bst);
+
+    puts("apague um valor: ");
     int search_value = 0;
     scanf("%d", &search_value);
-    void *result = BST_search(bst, &search_value);
+    void *result = BST_remove(bst, &search_value);
 
     if (result) printf("Encontrado: %d\n", *(int *)result);
     else printf("Nao encontrado\n");
 
+    BST_print(bst);
     BST_free(bst);
     return 0;
 }
