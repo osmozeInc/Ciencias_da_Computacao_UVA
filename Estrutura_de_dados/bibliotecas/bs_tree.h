@@ -18,7 +18,9 @@ void BST_insert(BST *bst, void *value);
 void *BST_search(BST *bst, void *value);
 void *BST_remove(BST *bst, void *value);
 void BST_print(BST *bst);
-
+void *BST_min(BST *bst);
+BST *vecToBST(int vec[], int length);
+BST *vecToBSTLogic(int vec[], int length);
 
 /*
 void Tree_print(Tree *t);

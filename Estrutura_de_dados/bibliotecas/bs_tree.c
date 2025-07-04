@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "bs_tree.h"
 
+int cmp(void *a, void *b) {
+    return *(int *)a - *(int *)b;
+}
+
 BST *BST_init(int (*cmp)(void *, void *)) {
     BST *bst = NULL;
 
@@ -197,101 +201,52 @@ void BST_print(BST *bst) {
     }
 }
 
+void *BST_min(BST *bst) {
+    if (!bst->root) return NULL;
 
+    BST_node *node = bst->root;
 
-
-/*
-
-void Tree_print(Tree *t) {  // PRINT USANDO O PERCURSO IN-ORDER
-if (t) {
-    Tree_print(t->left);
-    
-    if (t->type == INT_TYPE)
-    printf("%d ", *(int *)t->value);
-    else if (t->type == INT_TYPE)
-            printf("%c ", *(char *)t->value);
-            else 
-            puts("Valor desconhecido");
-            
-            Tree_print(t->right);
-        }
+    while (node->left) {
+        node = node->left;
     }
-    
-    int Tree_returnResult(Tree *t) {  // SOMA USANDO O PERCURSO POST-ORDER
-    if (t) {
-        if (t->type == INT_TYPE)
-        return *(int *)t->value;
-        
-        char op = *(char *)t->value;
-        
-        int left = Tree_returnResult(t->left);
-        int right = Tree_returnResult(t->right);
-        
-        if (op == '+')
-        return left + right;
-        else if (op == '*')
-        return left * right;
-        else if (op == '-')
-        return left - right;
-        else if (op == '/')
-        return left / right;
+
+    return node->value;
+}
+
+BST *vecToBSTLogic(int vec[], int length) {
+    if (length == 0) return NULL;
+
+    BST *bst = BST_init(cmp);
+
+    for (int i = length / 2; i >= 1; i = i / 2) {
+        BST_insert(bst, &vec[i]);
     }
+
+    for (int i = 0; i < length; i++) {
+        void *existe = BST_search(bst, &vec[i]);
+
+        if (!existe) BST_insert(bst, &vec[i]);
+    }
+
+    return bst;
 }
 
-Tree *Tree_initSetTree() {
-    static int numero[11] = {3, 6, 4, 1, 5, 2, 9, 8, 7, 5, 3};
-    
-    Tree *t = Tree_init(&numero[0], INT_TYPE,
-    Tree_init(&numero[1], INT_TYPE,                      
-    Tree_init(&numero[2], INT_TYPE,                   
-    Tree_init(&numero[3], INT_TYPE, NULL, NULL),  
-    Tree_init(&numero[4], INT_TYPE, NULL, NULL)     
-),
-Tree_init(&numero[5], INT_TYPE,                   
-Tree_init(&numero[6], INT_TYPE, NULL, NULL),    
-Tree_init(&numero[7], INT_TYPE, NULL, NULL)      
-)
-),
-Tree_init(&numero[8], INT_TYPE, 
-NULL, 
-Tree_init(&numero[9], INT_TYPE, 
-Tree_init(&numero[10], INT_TYPE,
-NULL, 
-NULL),
-NULL
-)
-)
-);
+BST *vecToBST_aux(BST *bst, int vec[], int start, int end) {
+    if (start > end) return bst;
 
-return t;
+    int mid = (start + end) / 2;
+    BST_insert(bst, &vec[mid]);
 
-//                   ___3__
-//                  /      \
-//                _6__      7
-//               /    \      \
-//              4      2      5
-//             / \    / \    /
-//            1   5  9   8  3
+    vecToBST_aux(bst, vec, start, mid - 1);
+    vecToBST_aux(bst, vec, mid + 1, end);
+
+    return bst; 
 }
 
-// função para buscar um item e retornar seu pai
-int Tree_searchItemAndReturnParent(Tree *t, int item) {
-    if (t){
-        
-    if (t->left && *(int *)t->left->value == item)
-    return *(int *)t->value;
-    
-    if (t->right && *(int *)t->right->value == item)
-    return *(int *)t->value;
-    
-    int result = Tree_searchItemAndReturnParent(t->left, item);
-    if (result)
-    return result;
-    
-    return Tree_searchItemAndReturnParent(t->right, item);
-}
+BST *vecToBST(int vec[], int length) {
+    if (length == 0) return NULL;
 
-return 0;
-}
+    BST *bst = BST_init(cmp);
 
-*/
+    return vecToBST_aux(bst, vec, 0, length - 1);
+}
