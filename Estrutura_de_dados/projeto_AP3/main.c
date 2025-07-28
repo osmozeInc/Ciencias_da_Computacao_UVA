@@ -8,6 +8,5 @@ int main() {
     system("gcc animacao.c -o animacao.exe");
     system("animacao.exe");
 
-    
     return 0;
 }
