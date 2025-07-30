@@ -4,6 +4,7 @@
 
 int main(){
     Grafo *grafo = Grafo_init(1, "caio");
+    Grafo *grafo_popular = Grafo_init(0, "");
    Grafo_insert_vertice(grafo, 2, "joao");
    Grafo_insert_vertice(grafo, 3, "pedro");
    Grafo_insert_vertice(grafo, 4, "ana");
@@ -27,13 +28,9 @@ int main(){
     Grafo_insert_vizinho(grafo, 8, 6, "maros");
     Grafo_insert_vizinho(grafo, 8, 9, "renata");
 
-    Grafo_printNome(grafo);
 
-    int num = contar_seguidos(grafo, "joao");
-    printf("\njoao segue %d pessoas\n", num);
-
-    num = contar_seguidos(grafo, "caio");
-    printf("caio segue %d pessoas\n", num);
+    grafo_popular = get_mais_popular(grafo);
+    Grafo_printNome(grafo_popular);
 
     Grafo_free(grafo);
 }

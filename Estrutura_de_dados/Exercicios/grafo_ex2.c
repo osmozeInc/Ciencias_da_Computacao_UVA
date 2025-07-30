@@ -27,13 +27,11 @@ int main(){
     Grafo_insert_vizinho(grafo, 8, 6, "maros");
     Grafo_insert_vizinho(grafo, 8, 9, "renata");
 
-    Grafo_printNome(grafo);
+    int num = contar_seguidores(grafo, "jane", 1);
+    printf("\njane tem %d seguidores\n\n", num);
 
-    int num = contar_seguidos(grafo, "joao");
-    printf("\njoao segue %d pessoas\n", num);
-
-    num = contar_seguidos(grafo, "caio");
-    printf("caio segue %d pessoas\n", num);
+    num = contar_seguidores(grafo, "caio", 1);
+    printf("\ncaio tem %d seguidores\n\n", num);
 
     Grafo_free(grafo);
 }
