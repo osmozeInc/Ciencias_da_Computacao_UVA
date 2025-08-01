@@ -9,6 +9,8 @@ void marcarCelula(Grafo *grafo, int id_vertice);
 int verificarVitoria(Grafo *grafo);
 int verificarDerrota(Grafo *grafo, int id_vertice_revelado);
 void revelarCelulasVazias(Grafo *grafo, int id_vertice);
+void revelarTodasAsMinas(Grafo *grafo);
+
 
 #endif // LOGICA_JOGO_H
 

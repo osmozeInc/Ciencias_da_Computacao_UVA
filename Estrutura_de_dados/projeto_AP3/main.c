@@ -6,37 +6,35 @@
 #include "logica_jogo.h"
 
 void exibirInstrucoes() {
-    printf("=== CAMPO MINADO ===\n");
-    printf("Comandos disponíveis:\n");
-    printf("  abrir <linha> <coluna>  - Revelar uma célula\n");
-    printf("  marcar <linha> <coluna> - Marcar/desmarcar uma célula como mina\n");
-    printf("  sair                    - Sair do jogo\n");
-    printf("  ajuda                   - Exibir estas instruções\n");
-    printf("\nLegenda:\n");
-    printf("  ?  - Célula oculta\n");
-    printf("  F  - Célula marcada (Flag)\n");
-    printf("  0-8 - Número de minas adjacentes\n");
-    printf("  *  - Mina (aparece apenas quando revelada)\n");
-    printf("==================\n\n");
+    printf("\n\n"
+            "=== CAMPO MINADO ===\n"
+            "Comandos disponíveis:\n"
+            "  abrir <linha> <coluna>  - Revelar uma célula\n"
+            "  marcar <linha> <coluna> - Marcar/desmarcar uma célula como mina\n"
+            "  sair                    - Sair do jogo\n"
+            "  ajuda                   - Exibir estas instruções\n"
+            "\nLegenda:\n"
+            "  ?  - Célula oculta\n"
+            "  F  - Célula marcada (Flag)\n"
+            "  0-8 - Número de minas adjacentes\n"
+            "  *  - Mina (aparece apenas quando revelada)\n"
+            "==================\n\n");
 }
 
-void revelarTodasAsMinas(Grafo *grafo) {
-    for (int i = 0; i < grafo->num_vertices; i++) {
-        if (grafo->vertices[i].minado) {
-            grafo->vertices[i].revelado = 1;
-        }
-    }
-}
 
 int main() {
-    Grafo grafo;
-    int num_linhas, num_colunas, num_minas;
-    char comando[20];
+    Grafo grafo;                                // cria um grafo
+    int num_linhas, num_colunas, num_minas;     // variaveis do usuário para configurar o jogo
+    char comando[20];                           // linhas de comando durante o jogo
     int linha, coluna;
-    int jogo_ativo = 1;
+    int jogo_ativo = 1;                         // flag que roda o jogo
 
-    system("cls");
+    // windows
     system("chcp 65001");
+    system("cls");
+
+    // linux
+    //system("clear");
     
     printf("=== CONFIGURAÇÃO DO JOGO ===\n");
     printf("Digite o número de linhas (máximo 10): ");
@@ -48,30 +46,31 @@ int main() {
     
     // Validar entrada
     if (num_linhas <= 0 || num_colunas <= 0 || num_linhas > 10 || num_colunas > 10) {
-        printf("Erro: Dimensões inválidas!\n");
+        printf("Erro: Dimensões inválidas!\n\n");
         return 1;
     }
     
     if (num_minas <= 0 || num_minas >= num_linhas * num_colunas) {
-        printf("Erro: Número de minas inválido!\n");
+        printf("Erro: Número de minas inválido!\n\n");
         return 1;
     }
     
     // Inicializar o jogo
-    inicializarGrafo(&grafo, num_linhas, num_colunas);
-    inicializarTabuleiro(&grafo, num_minas);
+    inicializarGrafo(&grafo, num_linhas, num_colunas);  // inicializa os vertices e as arestas do grafo
+    inicializarTabuleiro(&grafo, num_minas);            // distribui as minas aleatoriamente
     
-    exibirInstrucoes();
+    exibirInstrucoes();     // comandos do jogo
     
     // Loop principal do jogo
     while (jogo_ativo) {
+        linha, coluna = -1;
         exibirTabuleiro(&grafo);
         
         printf("Digite um comando: ");
         scanf("%s", comando);
         
-        if (strcmp(comando, "abrir") == 0) {
-            printf("Digite a linha e coluna: ");
+        if (strcmp(comando, "abrir") == 0) {    // ler até o primeiro espaço
+            printf("Digite a linha e coluna: ");    
             scanf("%d %d", &linha, &coluna);
             
             // Validar coordenadas
@@ -80,23 +79,22 @@ int main() {
                 continue;
             }
             
-            int id = mapearCoordenadasParaId(linha, coluna, num_colunas);
-            int resultado = revelarCelula(&grafo, id);
+            int id = mapearCoordenadasParaId(linha, coluna, num_colunas);    // pega o id da celula
+            int resultado = revelarCelula(&grafo, id);  // revela a celula e retorna um valor
             
-            if (resultado == -1) {
-                // Derrota
+            if (resultado == -1) {          // derrota
                 revelarTodasAsMinas(&grafo);
                 exibirTabuleiro(&grafo);
                 printf("💥 BOOM! Você pisou em uma mina! Fim de jogo.\n");
                 jogo_ativo = 0;
-            } else if (resultado == 1) {
+            } else if (resultado == 1) {    // vitória
                 // Verificar vitória
                 if (verificarVitoria(&grafo)) {
                     exibirTabuleiro(&grafo);
                     printf("🎉 Parabéns! Você venceu!\n");
                     jogo_ativo = 0;
                 }
-            } else if (resultado == 0) {
+            } else if (resultado == 0) {    // celula aberta
                 printf("Não foi possível revelar esta célula.\n");
             }
             

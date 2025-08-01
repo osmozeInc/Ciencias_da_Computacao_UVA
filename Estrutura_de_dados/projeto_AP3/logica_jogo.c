@@ -102,3 +102,10 @@ int verificarDerrota(Grafo *grafo, int id_vertice_revelado) {
     return grafo->vertices[id_vertice_revelado].minado;
 }
 
+void revelarTodasAsMinas(Grafo *grafo) {
+    for (int i = 0; i < grafo->num_vertices; i++) {
+        if (grafo->vertices[i].minado) {
+            grafo->vertices[i].revelado = 1;
+        }
+    }
+}

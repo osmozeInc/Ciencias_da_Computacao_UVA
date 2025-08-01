@@ -1,7 +1,7 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
-#define MAX_VERTICES 100 // Definir um tamanho máximo para o tabuleiro (ex: 10x10)
+#define MAX_VERTICES 100 // tamanho máximo do tabuleiro
 
 typedef struct Vertice {
     int id;
